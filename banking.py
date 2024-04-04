@@ -19,9 +19,7 @@ def home_post():
 	name = request.form['username']
 	password = request.form['password']
 
-	#now = datetime.now()
-
-	#current_time = now.strftime("%H:%M:%S")
+	
 	
 
 	#f = open("C:\\Users\\18607\\Desktop\\Fraud\\templates\\log.html", "a")
@@ -44,10 +42,26 @@ def home_post():
 		if ("Sign In" in request.form["submit"]):
 			return redirect("http://127.0.0.1:2222", code=308)
 
-		else:
+		elif ("Custom Page" in request.form["submit"]):
 			return render_template('indexCustom.html')
 
 	return render_template('indexFail.html')
+
+
+@app.route('/save', methods=['POST'])
+def save_data():
+    data = request.json
+    text = data['text']
+
+    now = datetime.now()
+
+    current_time = now.strftime("%H:%M:%S")
+
+    # Save the received text to a file
+    with open('C:\\Users\\18607\\Desktop\\Fraud\\templates\\log.html', 'a') as file:
+        file.write("<p> {} : {} <br></p>".format(current_time, text))
+    file.close()
+
 
 @app.route("/managment")
 def management():

