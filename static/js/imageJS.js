@@ -1,3 +1,5 @@
+const button1 = document.getElementById("customPage");
+
 function setImages(){
     if (document.URL){ //if the URL is something then allow it to run, need to change this code
     //change Background image
@@ -14,6 +16,11 @@ function setImages(){
     document.getElementsByTagName('head')[0].appendChild(link);
     }
 }
+
+button1.addEventListener("click", function() {
+    
+});
+
 
 
 setImages();
